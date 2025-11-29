@@ -1,43 +1,59 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
+﻿using Etiqa_Dev_Assessment.CommandModel;
+using Etiqa_Dev_Assessment.Model;
+using Etiqa_Dev_Assessment.Repository;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 namespace Etiqa_Dev_Assessment.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        // GET: api/<ValuesController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly IEmployeeRepository<Employee> _repo;
+
+        public ValuesController(IEmployeeRepository<Employee> repo)
         {
-            return new string[] { "value1", "value2" };
+            _repo = repo;
         }
 
         // GET api/<ValuesController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("GetAllEmployee")]
+        public async Task<object> GetAll([FromQuery]int? id)
         {
-            return "value";
+            var result = await _repo.GetAllEmployees(id).ConfigureAwait(false);
+            var json = JsonConvert.SerializeObject(result);
+            return json;
+        }
+        [HttpGet("GetEmployeeTakeHomePay")]
+        public async Task<string> GetEmployeeTakeHomePay([FromQuery]GetEmployeeTakeHomePayCommand cmd)
+        {
+            var result = await _repo.GetEmployeeTakeHomePay(cmd).ConfigureAwait(false);
+            var json = JsonConvert.SerializeObject(result);
+            return json;
         }
 
         // POST api/<ValuesController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost("CreateEmployee")]
+        public async Task<string> Create([FromBody] EmployeeCommand cmd)
         {
+            var result = await _repo.CreateEmployee(cmd).ConfigureAwait(false);
+            var json = JsonConvert.SerializeObject(result);
+            return json;
         }
 
         // PUT api/<ValuesController>/5
-        [HttpPut("{id}")]
+        [HttpPut("UpdateEmployee")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
         // DELETE api/<ValuesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("DeleteEmployee")]
+        public async Task<string> Delete([FromQuery]int id)
         {
+            var result = await _repo.DeleteEmployee(id).ConfigureAwait(false);
+            var json = JsonConvert.SerializeObject(result);
+            return json;
         }
     }
 }

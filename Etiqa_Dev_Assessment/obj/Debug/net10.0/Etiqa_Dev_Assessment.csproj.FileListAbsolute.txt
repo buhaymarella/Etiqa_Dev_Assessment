@@ -169,3 +169,7 @@ D:\Downloads\Etiqa\Etiqa_Dev_Assessment\Etiqa_Dev_Assessment\obj\Debug\net10.0\r
 D:\Downloads\Etiqa\Etiqa_Dev_Assessment\Etiqa_Dev_Assessment\bin\Debug\net10.0\Swashbuckle.AspNetCore.Swagger.dll
 D:\Downloads\Etiqa\Etiqa_Dev_Assessment\Etiqa_Dev_Assessment\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\Downloads\Etiqa\Etiqa_Dev_Assessment\Etiqa_Dev_Assessment\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\Downloads\Etiqa\Etiqa_Dev_Assessment\Etiqa_Dev_Assessment\bin\Debug\net10.0\Microsoft.AspNetCore.JsonPatch.dll
+D:\Downloads\Etiqa\Etiqa_Dev_Assessment\Etiqa_Dev_Assessment\bin\Debug\net10.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+D:\Downloads\Etiqa\Etiqa_Dev_Assessment\Etiqa_Dev_Assessment\bin\Debug\net10.0\Newtonsoft.Json.Bson.dll
+D:\Downloads\Etiqa\Etiqa_Dev_Assessment\Etiqa_Dev_Assessment\bin\Debug\net10.0\Dapper.dll
