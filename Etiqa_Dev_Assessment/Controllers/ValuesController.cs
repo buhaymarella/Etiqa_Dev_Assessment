@@ -43,8 +43,11 @@ namespace Etiqa_Dev_Assessment.Controllers
 
         // PUT api/<ValuesController>/5
         [HttpPut("UpdateEmployee")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<string> Put([FromBody] UpdateEmployeeCommand cmd)
         {
+            var result = await _repo.UpdateEmployee(cmd).ConfigureAwait(false);
+            var json = JsonConvert.SerializeObject(result);
+            return json;
         }
 
         // DELETE api/<ValuesController>/5

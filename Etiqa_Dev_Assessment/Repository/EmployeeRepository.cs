@@ -135,11 +135,41 @@ namespace Etiqa_Dev_Assessment.Repository
                 return result.Exception(ex.Message);
             }
         }
-        public async Task<Result> UpdateEmployee(int id, EmployeeCommand cmd)
+        public async Task<Result> UpdateEmployee(UpdateEmployeeCommand cmd)
         {
             var result = new Result();
             try
             {
+                string connString = _configuration.GetConnectionString("DefaultConnection");
+                using var conn = new SqlConnection(connString);
+                await conn.OpenAsync();
+
+                var random = new Random();
+                string empNum = random.Next(0, 99999).ToString("D5");
+                string codeName = cmd.LastName.Substring(0, Math.Min(3, cmd.LastName.Length)).ToUpper();
+
+                if (cmd.Id == 0)
+                {
+                    return result.Exception("Employee ID is required");
+                }
+
+                await conn.ExecuteAsync(
+                    "UpdateEmployee",
+                    new
+                    {
+                        Id = cmd.Id,
+                        EmployeeNumber = $"{codeName}-{empNum}-{cmd.DateOfBirth.ToString("ddMMyyyy")}",
+                        EmployeeName = cmd.MiddleName == null
+                        ? $"{cmd.FirstName} {cmd.LastName}"
+                        : $"{cmd.FirstName} {cmd.MiddleName} {cmd.LastName}",
+                        DateOfBirth = cmd.DateOfBirth,
+                        DailyRate = cmd.DailyRate,
+                        WorkingDays = cmd.WorkingDays
+                    },
+                    commandType: CommandType.StoredProcedure
+                );
+
+                result.Success("Employee updated successfully");
                 return result;
             }
             catch (Exception ex)
@@ -241,8 +271,16 @@ namespace Etiqa_Dev_Assessment.Repository
                     current = current.AddDays(1);
                 }
 
+                var response = new
+                {
+                    EmployeeNumber = employee.EmployeeNumber,
+                    EmployeeName = employee.EmployeeName,
+                    TakeHomePay = totalPay,
+                    StartingDate = cmd.StartDate.ToString("mm-dd-yyyy"),
+                    EndingDate = cmd.EndDate.ToString("mm-dd-yyyy")
+                };
 
-                return result.Success("Calcualted Take Home Pay Successfully", $"Take-home Pay: {totalPay}");
+                return result.Success("Calcualted Take Home Pay Successfully", response);
             }
             catch (Exception ex)
             {

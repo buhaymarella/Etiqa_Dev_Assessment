@@ -9,5 +9,6 @@ namespace Etiqa_Dev_Assessment.Repository
         Task<Result> GetEmployeeTakeHomePay(GetEmployeeTakeHomePayCommand cmd);
         Task<Result> GetAllEmployees(int? id);
         Task<Result> DeleteEmployee(int id);
+        Task<Result> UpdateEmployee(UpdateEmployeeCommand cmd);
     }
 }
