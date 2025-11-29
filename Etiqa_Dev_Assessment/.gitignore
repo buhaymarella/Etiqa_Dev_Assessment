@@ -36,7 +36,6 @@ _ReSharper*/
 
 # Temporary files
 *.tmp
-*.bak
 *.swp
 
 # Publish folder
