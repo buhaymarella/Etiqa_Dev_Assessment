@@ -1,0 +1,47 @@
+# Visual Studio / VS Code
+.vs/
+.vscode/
+*.vsidx
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+bin/
+obj/
+Debug/
+Release/
+
+# Rider IDE
+.idea/
+
+# NuGet packages
+*.nupkg
+*.snupkg
+packages/
+
+# ASP.NET / .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+*.dbmdl
+
+# Resharper
+_ReSharper*/
+*.DotSettings.user
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# Publish folder
+publish/
+
+# Other system files
+Thumbs.db
+.DS_Store
